@@ -17,10 +17,10 @@ func main() {
 	router := mux.NewRouter().StrictSlash(true)
 
 	router.HandleFunc("/", homeLink).Methods("GET")
-	router.HandleFunc("/api/user/new", controllers.CreateAccount).Methods("POST")
-	router.HandleFunc("/api/user/login", controllers.Authenticate).Methods("POST")
+	router.HandleFunc("/api/users/new", controllers.CreateUser).Methods("POST")
+	router.HandleFunc("/api/users/login", controllers.Authenticate).Methods("POST")
 	router.HandleFunc("/api/contacts/new", controllers.CreateContact).Methods("POST")
-	router.HandleFunc("/api/me/contacts", controllers.GetContactsFor).Methods("GET")
+	router.HandleFunc("/api/contacts", controllers.GetContacts).Methods("GET")
 
 	router.Use(app.JwtAuthentication)
 

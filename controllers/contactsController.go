@@ -2,11 +2,9 @@ package controllers
 
 import (
 	"encoding/json"
-	"github.com/gorilla/mux"
 	"github.com/tarasikarius/go-rest-api/models"
 	u "github.com/tarasikarius/go-rest-api/utils"
 	"net/http"
-	"strconv"
 )
 
 var CreateContact = func(w http.ResponseWriter, r *http.Request) {
@@ -25,15 +23,8 @@ var CreateContact = func(w http.ResponseWriter, r *http.Request) {
 	u.Respond(w, resp)
 }
 
-var GetContactsFor = func(w http.ResponseWriter, r *http.Request) {
-	params := mux.Vars(r)
-	id, err := strconv.Atoi(params["id"])
-
-	if err != nil {
-		//The passed path parameter is not an integer
-		u.Respond(w, u.Message(false, "There was an error in your request"))
-		return
-	}
+var GetContacts = func(w http.ResponseWriter, r *http.Request) {
+	id := r.Context().Value("user") . (uint)
 
 	data := models.GetContacts(uint(id))
 	resp := u.Message(true, "success")
